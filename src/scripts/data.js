@@ -12,33 +12,49 @@ const renderProducts = (products) => {
 	products.map((product) => {
 		const card = document.createElement("div");
 		card.classList.add("card");
+		card.classList.add("mt-2");
 		card.classList.add("col-3");
 		card.innerHTML = `
             <h2>${product.title}</h2>
-            <h3>${product.brand}</h3>
-            <p>${product.category}</p>
-            <p>${product.description}</p>
-            <p>${product.discountPercentage}</p>
-			<button id="right" type="button">L</button>
-			<div id="productImg" class="scroll">
-				${product.images.map((images) => {
-					return `
-					<div class="productImage">
-						<img src="${images}">
-					</div>`;
-				})}
+			<div class="category mb-3">
+            	<span class="badge text-bg-info">${product.brand}</span>
+            	<span class="badge text-bg-primary">${product.category}</span>
 			</div>
-			<button id="left" type="button">R</button>
-            <p>${product.price} €</p>
-            <p>${product.rating}</p>
-            <p>${product.stock}</p>
+			<div class="border rounded-2 height-150px overflow-auto" >
+            	<p class="m-2">${product.description}</p>
+			</div>
+			<div class="category mt-2">
+				<span class="badge rounded-pill text-bg-warning">${product.price} €</span>
+            	<span class="badge rounded-pill text-bg-danger">${product.discountPercentage}%</span>
+			</div>
+			<div class="my-2 category">
+				<span class="badge rounded-pill text-bg-success">Rating: ${product.rating}</span>
+				<span class="badge rounded-pill text-bg-danger">In Stock: ${product.stock}</span>
+			</div>
+			<div class="pos-relative">
+				<button id="right-${product.id}" type="button" class="buttonR"></button>
+				<div id="productImg-${product.id}" class="scroll">
+					${product.images.map((images) => {
+						return `
+						<div class="productImage">
+							<img src="${images}">
+						</div>`;
+					})}
+				</div>
+				<button id="left-${product.id}" type="button" class="buttonL"></button>
+			</div>
         `;
 		productLists.appendChild(card);
+
+		const buttonRight = document.getElementById(`right-${product.id}`);
+		const buttonLeft = document.getElementById(`left-${product.id}`);
+
+		buttonRight.onclick = () => {
+			document.getElementById(`productImg-${product.id}`).scrollLeft += 250;
+		};
+
+		buttonLeft.onclick = () => {
+			document.getElementById(`productImg-${product.id}`).scrollLeft -= 250;
+		};
 	});
-};
-
-const buttonRight = document.getElementById("right");
-
-buttonRight.onclick = () => {
-	document.getElementById("productImg").scrollLeft += 20;
 };
