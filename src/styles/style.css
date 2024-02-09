@@ -1,0 +1,28 @@
+/* * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+} */
+
+img{
+    width: 100%;
+}
+
+.scroll{
+    width: 250px;
+    height: 100%;
+    display: flex;
+    overflow-x: scroll;
+    /* scroll-snap-type: x proximity; */
+}
+
+.productImage{
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: center;
+}
